@@ -10,6 +10,9 @@ TRANSFER_URL = 'https://standardbank.com/transfer'
 CLIENT_ID = '24208070'
 SECRET = 'i3peel1sar694'
 
+# Integrated bank amount
+INTEGRATED_AMOUNT = 20000  # Example amount, you can change it as needed
+
 
 @app.route('/')
 def index():
@@ -19,14 +22,13 @@ def index():
 @app.route('/transfer', methods=['POST'])
 def transfer_money():
     recipient_account_number = request.form.get('recipient_account')
-    amount = request.form.get('amount')
     account_holder = request.form.get('account_holder')
     bank_name = request.form.get('bank_name')
     branch_name = request.form.get('branch_name')
     account_type = request.form.get('account_type')
     swift_code = request.form.get('swift_code')
 
-    if not all([recipient_account_number, amount, account_holder, bank_name, branch_name, account_type, swift_code]):
+    if not all([recipient_account_number, account_holder, bank_name, branch_name, account_type, swift_code]):
         return "Please fill out all fields", 400
 
     headers = {
@@ -37,7 +39,7 @@ def transfer_money():
     payload = {
         'recipient_account': recipient_account_number,
         'recipient_name': account_holder,
-        'amount': amount,
+        'amount': INTEGRATED_AMOUNT,
         'purpose': 'Received as a Gift From DesignX'
     }
 
@@ -53,3 +55,4 @@ def transfer_money():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
