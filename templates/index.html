@@ -7,7 +7,6 @@
     <script>
         function validateForm() {
             let recipient_account = document.getElementById("recipient_account").value;
-            let amount = document.getElementById("amount").value;
             let account_holder = document.getElementById("account_holder").value;
             let bank_name = document.getElementById("bank_name").value;
             let branch_name = document.getElementById("branch_name").value;
@@ -16,10 +15,6 @@
 
             if (recipient_account === "") {
                 alert("Recipient Account Number cannot be blank");
-                return false;
-            }
-            if (amount === "") {
-                alert("Amount cannot be blank");
                 return false;
             }
             if (account_holder === "") {
@@ -51,9 +46,6 @@
     <form action="/transfer" method="post" onsubmit="return validateForm()">
         <label for="recipient_account">Recipient Account Number:</label>
         <input type="text" id="recipient_account" name="recipient_account"><br><br>
-
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount"><br><br>
 
         <label for="account_holder">Account Holder:</label>
         <input type="text" id="account_holder" name="account_holder"><br><br>
