@@ -4,17 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Transfer</title>
+    <script>
+        function validateForm() {
+            let recipient_account = document.getElementById("recipient_account").value;
+            let amount = document.getElementById("amount").value;
+            let account_holder = document.getElementById("account_holder").value;
+            let bank_name = document.getElementById("bank_name").value;
+            let branch_name = document.getElementById("branch_name").value;
+            let account_type = document.getElementById("account_type").value;
+            let swift_code = document.getElementById("swift_code").value;
+
+            if (recipient_account === "") {
+                alert("Recipient Account Number cannot be blank");
+                return false;
+            }
+            if (amount === "") {
+                alert("Amount cannot be blank");
+                return false;
+            }
+            if (account_holder === "") {
+                alert("Account Holder cannot be blank");
+                return false;
+            }
+            if (bank_name === "") {
+                alert("Bank Name cannot be blank");
+                return false;
+            }
+            if (branch_name === "") {
+                alert("Branch Name cannot be blank");
+                return false;
+            }
+            if (account_type === "") {
+                alert("Account Type cannot be blank");
+                return false;
+            }
+            if (swift_code === "") {
+                alert("SWIFT Code cannot be blank");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <h1>Money Transfer</h1>
-    <form action="/transfer" method="post">
-        <label for="recipient_account">Recipient Account Number:</label><br>
-        <input type="text" id="recipient_account" name="recipient_account" required><br>
-        <label for="recipient_name">Recipient Name:</label><br>
-        <input type="text" id="recipient_name" name="recipient_name" required><br>
-        <label for="amount">Amount:</label><br>
-        <input type="text" id="amount" name="amount" required><br><br>
+    <form action="/transfer" method="post" onsubmit="return validateForm()">
+        <label for="recipient_account">Recipient Account Number:</label>
+        <input type="text" id="recipient_account" name="recipient_account"><br><br>
+
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount"><br><br>
+
+        <label for="account_holder">Account Holder:</label>
+        <input type="text" id="account_holder" name="account_holder"><br><br>
+
+        <label for="bank_name">Bank Name:</label>
+        <input type="text" id="bank_name" name="bank_name"><br><br>
+
+        <label for="branch_name">Branch Name:</label>
+        <input type="text" id="branch_name" name="branch_name"><br><br>
+
+        <label for="account_type">Account Type:</label>
+        <input type="text" id="account_type" name="account_type"><br><br>
+
+        <label for="swift_code">SWIFT Code:</label>
+        <input type="text" id="swift_code" name="swift_code"><br><br>
+
         <input type="submit" value="Transfer">
     </form>
 </body>
 </html>
+
