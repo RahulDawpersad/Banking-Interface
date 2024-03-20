@@ -19,8 +19,15 @@ def index():
 @app.route('/transfer', methods=['POST'])
 def transfer_money():
     recipient_account_number = request.form.get('recipient_account')
-    recipient_name = request.form.get('recipient_name')
     amount = request.form.get('amount')
+    account_holder = request.form.get('account_holder')
+    bank_name = request.form.get('bank_name')
+    branch_name = request.form.get('branch_name')
+    account_type = request.form.get('account_type')
+    swift_code = request.form.get('swift_code')
+
+    if not all([recipient_account_number, amount, account_holder, bank_name, branch_name, account_type, swift_code]):
+        return "Please fill out all fields", 400
 
     headers = {
         'Content-Type': 'application/json',
@@ -29,7 +36,7 @@ def transfer_money():
 
     payload = {
         'recipient_account': recipient_account_number,
-        'recipient_name': recipient_name,
+        'recipient_name': account_holder,
         'amount': amount,
         'purpose': 'Received as a Gift From DesignX'
     }
@@ -39,9 +46,9 @@ def transfer_money():
         if response.status_code == 200:
             return 'Transfer successful!'
         else:
-            return f'Transfer failed with status code: {response.status_code}\n{response.text}'
+            return f'Transfer failed with status code: {response.status_code}\n{response.text}', 500
     except Exception as e:
-        return f'An error occurred: {e}'
+        return f'An error occurred: {e}', 500
 
 
 if __name__ == '__main__':
